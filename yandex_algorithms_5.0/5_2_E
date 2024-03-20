@@ -1,0 +1,78 @@
+#include <iostream>
+
+void fun() {
+    int N = 0;    
+    int N_pos = 0;
+    int N_neg = 0;
+    int pos_members[1000000];
+    int neg_members[1000000];
+    long long int max_b_pos = 0;
+    long long int max_a_neg = 0;
+    long long int step = 0;
+    long long int max = 0;
+    
+    int number_pos = 0;
+    int number_neg = 0;
+    int a, b, delta;
+    std::cin >> N;
+    for (int i=0; i<N; i++) {
+        std::cin >> a >> b;
+        delta = a - b;
+        if (delta >= 0) {
+            step += delta;
+            if (max_b_pos < b) {
+                max_b_pos = b;
+                number_pos = i+1;
+            }
+            pos_members[N_pos++] = i+1;
+        } else {
+            if (max_a_neg < a) {
+                max_a_neg = a;
+                number_neg = i+1;
+            }
+            neg_members[N_neg++] = i+1;
+        }
+    }
+    
+    /*std::cout  << "max_b_pos: " << max_b_pos << std::endl;
+    std::cout  << "number_pos: " << number_pos << std::endl;
+    std::cout  << "max_a_neg: " << max_a_neg << std::endl;
+    std::cout  << "number_neg: " << number_neg << std::endl;*/
+    
+    int flag_pos = 1;
+    if ((step + max_b_pos) > (step + max_a_neg)) {
+        max = step + max_b_pos;
+        flag_pos = 1;
+    } else {
+        max = step + max_a_neg;
+        flag_pos = 0;
+    }
+    
+    std::cout  << max << std::endl;
+    for (int i=0; i<N_pos; i++) {
+        if (flag_pos){
+            if (pos_members[i]!=number_pos) {
+                std::cout  << pos_members[i] << ' ';
+            }
+        } else {
+            std::cout  << pos_members[i] << ' ';
+        }
+    }
+    if (flag_pos) std::cout  << number_pos << ' ';
+    else std::cout  << number_neg << ' ';
+    
+    for (int i=0; i<N_neg; i++) {
+        if (flag_pos) {
+            std::cout  << neg_members[i] << ' ';
+        } else {
+            if (neg_members[i]!=number_neg) {
+                std::cout  << neg_members[i] << ' ';
+            }
+        }
+    }
+}
+
+int main() {
+    fun();
+    return 0;
+}
