@@ -1,0 +1,29 @@
+#include <iostream>
+
+void fun() {
+    int n= 0;
+    long long int x[100];
+    long long int y[100];
+    int x_min, x_max, y_min, y_max;
+
+    std::cin >> n ;
+    std::cin >> x[0] >> y[0];
+    x_min = x[0];
+    x_max = x[0];
+    y_min = y[0];
+    y_max = y[0];
+    
+    for (int i=1;i<n;i++) {
+        std::cin >> x[i] >> y[i];
+        if (x_min > x[i])  x_min = x[i];
+        if (x_max < x[i])  x_max = x[i];
+        if (y_min > y[i])  y_min = y[i];
+        if (y_max < y[i])  y_max = y[i];
+    }
+    std::cout << x_min << " "  << y_min << " "  << x_max << " "  << y_max << std::endl;
+}
+
+int main() {
+    fun();
+    return 0;
+}
