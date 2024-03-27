@@ -1,0 +1,40 @@
+#include <iostream>
+#include <string>
+#include <set>
+
+void fun() {
+    std::string first = "";
+    std::string second = "";
+    std::cin >> first;
+    std::cin >> second;
+    if (first.size()!=second.size()){
+        std::cout  << "NO" << std::endl;
+    } else {
+        std::multiset <char> first_set(first.begin(), first.end());
+        std::multiset <char> second_set(second.begin(), second.end());
+        
+        /*for (std::multiset <char>::iterator it = first_set.begin(); it != first_set.end(); ++it)
+        {
+            std::cout << *it;
+        }
+        std::cout  << std::endl;
+        
+        for (std::multiset <char>::iterator it = second_set.begin(); it != second_set.end(); ++it)
+        {
+            std::cout << *it;
+        }
+        std::cout  << std::endl;*/
+        
+        if (first_set == second_set) {
+            std::cout  << "YES" << std::endl;
+        } else {
+            std::cout  << "NO" << std::endl;
+        }
+
+    }
+}
+
+int main() {
+    fun();
+    return 0;
+}
