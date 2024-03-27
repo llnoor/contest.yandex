@@ -1,0 +1,42 @@
+#include <iostream>
+#include <map>
+
+void fun() {
+    int N = 0;
+    std::map <int, int> mp;
+    std::map <int, int> mp_pair;
+    int temp_int = 0;
+    std::cin >> N;
+    for (int i =0; i<N; i++) {
+        std::cin >> temp_int;  
+        if (mp.count(temp_int)>0) 
+            mp[temp_int] = mp[temp_int] + 1;
+        else 
+            mp[temp_int] = 1;
+    }
+    
+    int max = 0;
+    for (std::map<int, int>::iterator it = mp.begin(); it != mp.end(); ++it) {
+        //std::map<int, int>::iterator it_2 = it + 1;
+        //for (std::map<int, int>::iterator it_2 = it; it_2 != mp.end(); ++it_2) {
+            if (max < mp[it->first]) max = mp[it->first];
+            int delta = (it->first) - (std::next(it)->first);
+            
+            if ((delta==(-1)) || (delta==1)) {
+                //std::cout  << "delta: " << delta << std::endl;
+                mp_pair[it->first] = it->second + std::next(it)->second;
+                if (max < mp_pair[it->first]) max = mp_pair[it->first];
+            }
+        //}
+    }
+    /*for (std::map<int, int>::iterator it = mp_pair.begin(); it != mp_pair.end(); ++it) {
+        std::cout  <<  it->first << ":" << it->second << std::endl;
+    }*/
+    std::cout  <<  (N-max) << std::endl;
+    
+}
+
+int main() {
+    fun();
+    return 0;
+}
