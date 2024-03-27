@@ -1,0 +1,47 @@
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <set>
+
+void fun() {
+    std::string dict = "";
+    std::string text = "";
+    std::string new_text = "";
+    getline(std::cin, dict);
+    getline(std::cin, text);
+    
+    std::set<std::string> st;
+    
+    std::stringstream x;
+    x << dict;
+    std::string word = "";
+    while (x >> word) {
+        for (std::set<std::string>::iterator it = st.begin(); it != st.end(); ++it) {
+            size_t pos = word.find(*it);
+            if (pos == 0) {
+                word = *it;
+                break;
+            }
+        }
+        st.insert(word);
+    }
+
+    std::stringstream y;
+    y << text;
+    word = "";
+    while (y >> word) {
+        for (std::set<std::string>::iterator it = st.begin(); it != st.end(); ++it) {
+            size_t pos = word.find(*it);
+            if (pos == 0) {
+                word = *it;
+                break;
+            }
+        }
+        std::cout << word << " ";
+    }
+}
+
+int main() {
+    fun();
+    return 0;
+}
