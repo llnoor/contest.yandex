@@ -1,0 +1,61 @@
+#include <algorithm>
+#include <iostream>
+#include <iterator>
+#include <set>
+
+void fun() {
+    std::set<int> setA;
+    std::set<int> setB;
+    std::set<int> setC;
+    
+    
+    int N = 0;
+    int temp_int = 0;
+    std::cin >> N;
+    for (int i =0; i<N; i++) {
+        std::cin >> temp_int;
+        setA.insert(temp_int);
+    }
+    
+    std::cin >> N;
+    for (int i =0; i<N; i++) {
+        std::cin >> temp_int;
+        setB.insert(temp_int);
+    }
+    
+    std::cin >> N;
+    for (int i =0; i<N; i++) {
+        std::cin >> temp_int;
+        setC.insert(temp_int);
+    }
+    
+    std::set<int> setAB;
+    std::set<int> setBC;
+    std::set<int> setAC;
+    
+    set_intersection(setA.begin(), setA.end(), 
+           setB.begin(), setB.end(), 
+           inserter(setAB, setAB.begin()));
+           
+    set_intersection(setA.begin(), setA.end(), 
+           setC.begin(), setC.end(), 
+           inserter(setAC, setAC.begin()));
+           
+    set_intersection(setB.begin(), setB.end(), 
+           setC.begin(), setC.end(), 
+           inserter(setBC, setBC.begin()));
+
+    setAB.merge(setBC);
+    setAB.merge(setAC);
+    
+    
+    for (auto& item : setAB)
+         std::cout << item << " ";
+ 
+    std::cout << std::endl;
+}
+
+int main() {
+    fun();
+    return 0;
+}
