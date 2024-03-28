@@ -1,0 +1,42 @@
+#include <algorithm>
+#include <iostream>
+#include <iterator>
+#include <vector>
+
+int min_max(std::vector<int>& v, int k ,int N) {
+    int first = -1, i = 0, last = N;
+    while ( (first+1) < last) {
+        i = (first + last) / 2;
+        if (v[i] <= k) first = i;
+        else last = i;
+    }
+    return first;
+}
+
+void fun() {
+    int N = 0;
+    int k = 0;
+    int diff = 0;
+    int min, max;
+    std::string ans = "";
+
+    std::cin >> N;
+    std::vector<int> v(N);
+    for (int i =0; i<N; i++) {
+        std::cin >> v[i];
+    }
+    sort(v.begin(), v.end());
+    
+    std::cin >> k;
+    for (int i =0; i<k; i++) {
+        std::cin >> min >> max;
+        diff = min_max(v,max,N) - min_max(v,min-1,N);
+        ans += std::to_string(diff) + " ";
+    }
+    std::cout << ans << std::endl;
+}
+
+int main() {
+    fun();
+    return 0;
+}
