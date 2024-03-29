@@ -1,0 +1,41 @@
+#include <iostream>
+
+unsigned long long  sum(unsigned long long  i) {
+    return ((1+i)*i/2);
+}
+
+int main() {
+    unsigned long long int N = 0;
+    unsigned long long int i = 0;
+    unsigned long long int k = 0;
+    unsigned long long int sum_k = 0;
+    unsigned long long int x = 0;
+    unsigned long long int y = 0;
+    
+    
+    std::cin >> N;
+    if (N ==1) k = 1;
+
+    
+    for (i=1; i<=N; i++) {
+        //std::cout << i << ": " << sum(i) << std::endl;
+        if (N<=sum(i)) {
+            k = i-1;
+            sum_k = sum(i) - i;
+            break;
+        }
+    }
+    
+    //std::cout << "k: " << k << std::endl;
+    //std::cout << "sum_k: " << sum_k << std::endl;
+    
+    if (k%2==0) {
+        x = N - sum_k;
+        y = (k+2) - x;
+    } else {
+        y = N - sum_k;
+        x = (k+2) - y;
+    }
+    std::cout << x << "/" << y << std::endl;
+    return 0;
+}
