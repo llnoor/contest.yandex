@@ -1,0 +1,80 @@
+#include <iostream>
+#include <vector>
+
+int get_high(std::vector<int>& vn, int w, int mid) {
+    int high = 1;
+    int lenght = mid;
+    int sum =-1;
+    for (int i=0; i<vn.size(); i++) {
+        //std::cout << "(sum + 1 + vn[i]): " << (sum + 1 + vn[i]) << "   vn[i]: " <<  vn[i] << "  high:" << high;
+        if ((sum + 1 + vn[i]) <=lenght) {
+            sum = sum + 1 + vn[i];
+            //std::cout << "add"  << std::endl;
+        } else {
+            //if (i<vn.size()-1) 
+            high++;
+            //std::cout << "high"  << std::endl;
+            i--;
+            sum = -1;
+        }
+    }
+    return high;
+}
+
+int main() {
+    int w = 0;
+    int n = 0;
+    int m = 0;
+    int temp = 0;
+    int max_n = 0;
+    int max_m = 0;
+    int high_n = 0;
+    int high_m = 0;
+    
+    std::vector<int> vn;
+    std::vector<int> vm;
+    
+    std::cin >> w >> n >> m;
+    for (int i=0; i<n; i++) {
+        std::cin >> temp;
+        vn.push_back(temp);
+        if (max_n < temp) max_n = temp;
+    }
+    
+    for (int j=0; j<m; j++) {
+        std::cin >> temp;
+        vm.push_back(temp);
+        if (max_m < temp) max_m = temp;
+    }
+    
+    bool flag = false;
+    int l = max_n;
+    int r = w - max_m;
+    int mid = (l + r) / 2;
+    high_n = get_high(vn, w, mid);
+    high_m = get_high(vm, w, w-mid);
+    int min_high = ((high_n>high_m)?high_n:high_m); 
+    int temp_high;
+
+    //std::cout << "max_n: " << max_n << "max_m: " << max_m << std::endl;
+    
+    while ((l <= r) && (flag != true)) {
+        mid = (l + r) / 2;
+        //std::cout << "mid: " << mid << std::endl;
+        high_n = get_high(vn, w, mid);
+        //std::cout << std::endl;
+        high_m = get_high(vm, w, w-mid);
+        if ((high_n == high_m)||(l==r)) flag = true;
+        if (high_n < high_m) {
+            r = mid - 1;
+        } else { 
+            l = mid + 1;
+        }
+        temp_high = ((high_n>high_m)?high_n:high_m);
+        if (min_high > temp_high) min_high = temp_high;
+
+    }
+    
+    std::cout << min_high << std::endl;
+    return 0;
+}
