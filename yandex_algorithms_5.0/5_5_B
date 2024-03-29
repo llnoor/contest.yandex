@@ -1,0 +1,20 @@
+#include <iostream>
+
+int main() {
+    unsigned long long int N = 0;
+    unsigned long long int i = 0;
+    unsigned long long int k = 0;
+    unsigned long long int points = 0;
+    std::cin >> N;
+    if (N ==1) k = 1;
+    
+    for (i=1; i<=N; i++) {
+        points = points + ((1+i)*i/2+i);
+        if ((points-1)>N) {
+            k = i-1;
+            break;
+        }
+    }
+    std::cout << k << std::endl;
+    return 0;
+}
