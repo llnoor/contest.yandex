@@ -1,0 +1,17 @@
+#include <iostream>
+
+int fact(int N) {
+    if (N < 0)  return 0;
+    if (N == 0) return 1;
+    else return N * fact(N - 1);
+}
+
+void foo() {
+    int n = 0;
+    std::cout << fact(n) << std::endl;
+}
+
+int main() {
+    foo();
+    return 0;
+}
