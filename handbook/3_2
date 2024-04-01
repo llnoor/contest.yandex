@@ -1,0 +1,19 @@
+#include <iostream>
+
+unsigned long long int fact(int N) {
+    if (N < 0)  return 0;
+    if (N == 0) return 1;
+    else return N * fact(N - 1);
+}
+
+void foo() {
+    unsigned long long  n;
+    unsigned long long  k;
+    std::cin >> n >> k;
+    std::cout << fact(n)/(fact(k)*fact(n-k)) << std::endl;
+}
+
+int main() {
+    foo();
+    return 0;
+}
